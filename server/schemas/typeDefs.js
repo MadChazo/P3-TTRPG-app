@@ -1,15 +1,18 @@
 const typeDefs = `
 type User {
     _id: ID
+
     firstName: String
     lastName: String
     email: String
     character: [Character]
+
 }
 
 type Character {
     _id: ID
     name: String
+
     description: String
 }
 
@@ -31,3 +34,4 @@ type Mutation {
 }
 `
 module.exports = typeDefs;
+
