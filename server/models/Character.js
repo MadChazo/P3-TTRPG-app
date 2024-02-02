@@ -13,6 +13,18 @@ const characterSchema = new Schema({
     required: true,
     trim: true,
   },
+  stats: {
+    strength: { type: Number, default: 0 },
+    dexterity: { type: Number, default: 0 },
+    constitution: { type: Number, default: 0 },
+    intelligence: { type: Number, default: 0 },
+    wisdom: { type: Number, default: 0 },
+    charisma: { type: Number, default: 0 },
+  },
+  backstory: {
+    type: String,
+    trim: true,
+  },
   campaigns: [Campaign],
   user: User,
 });
