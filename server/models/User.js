@@ -1,6 +1,4 @@
 const { Schema, model } = require("mongoose");
-const Character = require("./Character.js");
-const Campaign = require("./Campaign.js");
 const bcrypt = require("bcrypt");
 
 const userSchema = new Schema({
@@ -22,8 +20,18 @@ const userSchema = new Schema({
     trim: true,
     match: [/.+@.+..+/],
   },
-  characters: [Character],
-  campaigns: [Campaign],
+  characters: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Character",
+    },
+  ],
+  campaigns: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Campaign",
+    },
+  ],
 });
 
 userSchema.pre("save", async function (next) {

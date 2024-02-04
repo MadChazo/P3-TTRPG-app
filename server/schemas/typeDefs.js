@@ -1,9 +1,7 @@
 const typeDefs = `
 type User {
     _id: ID
-
-    firstName: String
-    lastName: String
+    username: String
     email: String
     character: [Character]
     campaign: [Campaign]
@@ -16,6 +14,8 @@ type Character {
     class: String
     stats: CharacterStats
     backstory: String
+    user: User
+    campaigns: [Campaign]
 }
 
 type CharacterStats {
@@ -31,6 +31,10 @@ type Campaign {
     _id: ID
     name: String
     description: String
+    day: String
+    characters: [Character]
+    gm: User
+    players: [User]
 }
 
 type Auth {
@@ -42,11 +46,13 @@ type Mutation {
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     addCampaign(name: String!, description: String!, goal: Int!): Campaign
+    addCharacter(name: String!, class: String!, stats: CharacterStatsInput, backstory: String): Character
+    characterInCampaign(characterId: ID, campaignIds: [ID]): Character
 }
 
 input CharacterInput {
     name: String!
-    characterClass: String!
+    class: String!
     stats: CharacterStatsInput
     backstory: String
 }
@@ -58,6 +64,13 @@ input CharacterStatsInput {
     intelligence: Int
     wisdom: Int
     charisma: Int
+}
+
+type Query {
+    users: [User]
+    user: User
+    characters: [Character]
+    campaigns: [Campaign]
 }
 `
 module.exports = typeDefs;

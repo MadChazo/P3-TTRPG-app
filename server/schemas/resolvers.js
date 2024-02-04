@@ -1,7 +1,5 @@
-const User = require("./models/User");
-const Character = require("./models/Character");
-const Campaign = require("./models/Campaign");
-const { signToken, AuthenticationError } = require("");
+const { User, Character, Campaign } = require("../models");
+// const { signToken, AuthenticationError } = require("");
 
 const resolvers = {
   Query: {
@@ -13,6 +11,12 @@ const resolvers = {
         .populate("characters")
         .populate("campaigns");
     },
+    characters: async () => {
+      return Character.find().populate("user").populate("campaigns");
+    },
+    campaigns: async () => {
+      return Campaign.find().populate("players").populate("gm");
+    }
   },
 
   Mutation: {
