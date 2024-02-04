@@ -1,6 +1,4 @@
 const { Schema, model } = require("mongoose");
-const User = require("./User.js");
-const Campaign = require("./Campaign.js");
 
 const characterSchema = new Schema({
   name: {
@@ -14,19 +12,27 @@ const characterSchema = new Schema({
     trim: true,
   },
   stats: {
-    strength: { type: Number, default: 0 },
-    dexterity: { type: Number, default: 0 },
-    constitution: { type: Number, default: 0 },
-    intelligence: { type: Number, default: 0 },
-    wisdom: { type: Number, default: 0 },
-    charisma: { type: Number, default: 0 },
+    strength: { type: Number, default: 10 },
+    dexterity: { type: Number, default: 10 },
+    constitution: { type: Number, default: 10 },
+    intelligence: { type: Number, default: 10 },
+    wisdom: { type: Number, default: 10 },
+    charisma: { type: Number, default: 10 },
   },
   backstory: {
     type: String,
     trim: true,
   },
-  campaigns: [Campaign],
-  user: User,
+  campaigns: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Campaign",
+    },
+  ],
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 
 const Character = model("Character", characterSchema);

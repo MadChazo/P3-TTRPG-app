@@ -1,6 +1,4 @@
 const { Schema, model } = require("mongoose");
-const User = require("./User.js");
-const Character = require("./Character.js");
 
 const campaignSchema = new Schema({
   name: {
@@ -12,9 +10,26 @@ const campaignSchema = new Schema({
     type: String,
     trim: true,
   },
-  characters: [Character],
-  players: [User],
-  gm: User,
+  description: {
+    type: String,
+    trim: true,
+  },
+  characters: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Character",
+    },
+  ],
+  players: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
+  gm: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 
 const Campaign = model("Campaign", campaignSchema);

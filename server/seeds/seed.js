@@ -32,12 +32,14 @@ db.once("open", async () => {
 
   // Sets a random player as GM of each campaign
   for (newCampaign of campaigns) {
-    const tempGM =
-      newCampaign.players[
-        Math.floor(Math.random() * newCampaign.players.length)
-      ];
-    newCampaign.gm = tempGM;
-    await tempGM.save();
+    if (newCampaign.players.length) {
+      const tempGM =
+        newCampaign.players[
+          Math.floor(Math.random() * newCampaign.players.length)
+        ];
+      newCampaign.gm = tempGM;
+      await tempGM.save();
+    }
   }
 
   console.log("Seed complete.");
