@@ -16,7 +16,7 @@ const resolvers = {
     },
     campaigns: async () => {
       return Campaign.find().populate("players").populate("gm");
-    }
+    },
   },
 
   Mutation: {
@@ -54,7 +54,21 @@ const resolvers = {
 
       return newCharacter;
     },
+    addCampaign: async (parent, { campaignInput }, { user }) => {
+      if (!user) {
+        throw AuthenticationError;
+      }
+      const newCampaign = await Campaign.create({
+        ...campaignInput,
+        gm: user._id,
+      });
 
+      await User.findByIdAndUpdate(user._id, {
+        $push: {
+          campaigns: newCampaign._id,
+        },
+      });
+    },
     characterInCampaign: async (parent, { characterId, campaignIds }) => {
       const updatedCharacter = await Character.findByIdAndUpdate(
         characterId,

@@ -45,8 +45,8 @@ type Auth {
 type Mutation {
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addCampaign(name: String!, description: String!, goal: Int!): Campaign
-    addCharacter(name: String!, class: String!, stats: CharacterStatsInput, backstory: String): Character
+    addCampaign(name: String!, description: String!, day: String!): Campaign
+    addCharacter(stats: CharacterStatsInput): Character
     characterInCampaign(characterId: ID, campaignIds: [ID]): Character
 }
 
