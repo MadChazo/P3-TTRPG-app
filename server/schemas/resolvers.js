@@ -1,5 +1,5 @@
 const { User, Character, Campaign } = require("../models");
-// const { signToken, AuthenticationError } = require("");
+const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
   Query: {
@@ -28,12 +28,12 @@ const resolvers = {
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
       if (!user) {
-        throw AuthenticationError;
+        throw new AuthenticationError('Authenticartion failed');
       }
 
       const correctPw = await user.isCorrectPassword(password);
       if (!correctPw) {
-        throw AuthenticationError;
+        throw new AuthenticationError('Authentication failed');
       }
 
       const token = signToken(user);
@@ -41,7 +41,7 @@ const resolvers = {
     },
     addCharacter: async (parent, { characterInput }, { user }) => {
       if (!user) {
-        throw AuthenticationError;
+        throw new AuthenticationError('User not authenticated');
       }
       const newCharacter = await Character.create({
         ...characterInput,
@@ -56,7 +56,7 @@ const resolvers = {
     },
     addCampaign: async (parent, { campaignInput }, { user }) => {
       if (!user) {
-        throw AuthenticationError;
+        throw new AuthenticationError('User not authenticated');
       }
       const newCampaign = await Campaign.create({
         ...campaignInput,
@@ -68,6 +68,8 @@ const resolvers = {
           campaigns: newCampaign._id,
         },
       });
+
+      return newCampaign;
     },
     characterInCampaign: async (parent, { characterId, campaignIds }) => {
       const updatedCharacter = await Character.findByIdAndUpdate(

@@ -12,13 +12,15 @@ const userSchema = new Schema({
     type: String,
     required: true,
     trim: true,
+    minlength: [6, 'Password must be at least 6 or more characters'],
+    maxlength: [12, 'Password must be under 12 characters'],
   },
   email: {
     type: String,
     required: true,
     unique: true,
     trim: true,
-    match: [/.+@.+..+/],
+    match: [/\S+@\S+\.\S+/, 'Invalid email address'],
   },
   characters: [
     {
