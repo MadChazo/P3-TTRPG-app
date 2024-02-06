@@ -43,10 +43,10 @@ type Auth {
 }
 
 type Mutation {
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     addCampaign(name: String!, description: String!, day: String!): Campaign
-    addCharacter(stats: CharacterStatsInput): Character
+    addCharacter(characterInput: CharacterInput): Character
     characterInCampaign(characterId: ID, campaignIds: [ID]): Character
 }
 
@@ -68,7 +68,7 @@ input CharacterStatsInput {
 
 type Query {
     users: [User]
-    user: User
+    user(username: String): User
     characters: [Character]
     campaigns: [Campaign]
 }
