@@ -2,9 +2,9 @@ import React from 'react'
 
 const Campaign = () => {
     return (
-        <footer>
+        <main>
             <p>Campaign</p>
-        </footer>
+        </main>
     )
 }
 
