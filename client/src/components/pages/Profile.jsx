@@ -1,10 +1,12 @@
 import React from 'react'
+import Button from 'react-bootstrap/Button';
 
 const Profile = () => {
     return (
-        <footer>
-            <p>Profile</p>
-        </footer>
+        <main>
+            <h1>My Characters</h1>
+            <Button variant="primary" href="/create">Create Character</Button>{' '}
+        </main>
     )
 }
 
