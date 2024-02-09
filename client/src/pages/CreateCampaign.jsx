@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import backgroundImage from '../../assets/CreateCampaign.jpg'
+import backgroundImage from '../assets/CreateCampaign.jpg'
 import { Form, Row, Col } from "react-bootstrap";
 
 const CreateCampaign = () => {
