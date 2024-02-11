@@ -63,10 +63,11 @@ const Login = () => {
   return (
     <main
       style={{
-        backgroundImage: `url(${backgroundImage})`,
+        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2)), url(${backgroundImage})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         height: "100vh",
+      
       }}
     >
       <Container className="d-flex justify-content-center">

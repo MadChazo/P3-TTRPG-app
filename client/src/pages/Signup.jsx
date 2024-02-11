@@ -1,36 +1,87 @@
-import React from 'react'
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import { useMutation } from "@apollo/client";
+import { ADD_USER } from "../utils/mutations";
+import Auth from "../utils/auth";
+import { validateEmail, validatePassword } from '../utils/auth';
 
 const Signup = () => {
-    return (
-        <Form>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Username</Form.Label>
-            <Form.Control type="username" placeholder="Username" />
-            <Form.Text className="text-muted">
-            
-            </Form.Text>
-          </Form.Group>
+  const [userFormData, setUserFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
 
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email</Form.Label>
-            <Form.Control type="email" placeholder="Email" />
-            <Form.Text className="text-muted">
-            
-            </Form.Text>
-          </Form.Group>
-    
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
-          </Form.Group>
-    
-          <Button variant="primary" type="submit">
-            Signup
-          </Button>
-        </Form>
-      );
-}
+  const [addUser, { error }] = useMutation(ADD_USER);
 
-export default Signup
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUserFormData({ ...userFormData, [name]: value });
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await addUser({
+        variables: { ...userFormData },
+      });
+      console.log(response, "response");
+      Auth.login(response.data.addUser.token);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  return (
+    <Form onSubmit={handleFormSubmit}>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Username</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Username"
+          name="username"
+          value={userFormData.username}
+          onChange={handleInputChange}
+        />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Email</Form.Label>
+        <Form.Control
+          type="email"
+          placeholder="Email"
+          name="email"
+          value={userFormData.email}
+          onChange={handleInputChange}
+          isInvalid={!validateEmail(userFormData.email)}
+        
+        />
+        <Form.Control.Feedback type="invalid">
+          Please enter a valid email.
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control
+          type="password"
+          placeholder="Password"
+          name="password"
+          value={userFormData.password}
+          onChange={handleInputChange}
+          isInvalid={!validatePassword(userFormData.password)}
+          />
+          <Form.Control.Feedback type="invalid">
+            Password must contain at least one special character, one uppercase letter, and one number.
+          </Form.Control.Feedback>
+        </Form.Group>
+
+      <Button variant="primary" type="submit">
+        Signup
+      </Button>
+    </Form>
+  );
+};
+
+export default Signup;
