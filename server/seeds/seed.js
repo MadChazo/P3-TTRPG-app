@@ -41,7 +41,6 @@ db.once("open", async () => {
       await tempGM.save();
     }
   }
-
   console.log("Seed complete.");
   process.exit(0);
 });

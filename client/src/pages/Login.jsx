@@ -40,15 +40,12 @@ const Login = () => {
     }
 
     try {
-      const response = await loginUser({ variables: { userFormData } });
-
-      if (!response.ok) {
-        throw new Error("something went wrong!");
-      }
-
-      const { token, user } = await response.json();
-      console.log(user);
-      Auth.login(token);
+      let username = userFormData.username;
+      let password = userFormData.password;
+      console.log(username, password);
+      const response = await loginUser({ variables: { username, password } });
+      console.log(response, "response");
+      Auth.login(response.data.loginUser.token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
@@ -67,7 +64,6 @@ const Login = () => {
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         height: "100vh",
-      
       }}
     >
       <Container className="d-flex justify-content-center">

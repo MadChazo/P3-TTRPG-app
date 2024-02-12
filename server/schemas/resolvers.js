@@ -21,19 +21,22 @@ const resolvers = {
 
   Mutation: {
     addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
-      const token = signToken(user);
-      return { token, user };
+      const newUser = await User.create({ username, email, password });
+      const token = signToken(newUser);
+      return { token, newUser };
     },
-    login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
+    loginUser: async (parent, { username, password }) => {
+      const user = await User.findOne({ username });
+      console.log(user, " found");
       if (!user) {
-        throw new AuthenticationError('Authenticartion failed');
+        console.log("Incorrect User")
+        throw AuthenticationError;
       }
 
       const correctPw = await user.isCorrectPassword(password);
       if (!correctPw) {
-        throw new AuthenticationError('Authentication failed');
+        console.log("Incorrect Password")
+        throw AuthenticationError;
       }
 
       const token = signToken(user);
@@ -41,7 +44,7 @@ const resolvers = {
     },
     addCharacter: async (parent, { characterInput }, { user }) => {
       if (!user) {
-        throw new AuthenticationError('User not authenticated');
+        throw AuthenticationError;
       }
       const newCharacter = await Character.create({
         ...characterInput,
@@ -56,7 +59,7 @@ const resolvers = {
     },
     addCampaign: async (parent, { campaignInput }, { user }) => {
       if (!user) {
-        throw new AuthenticationError('User not authenticated');
+        throw AuthenticationError;
       }
       const newCampaign = await Campaign.create({
         ...campaignInput,
