@@ -40,13 +40,13 @@ type Campaign {
 }
 
 type Auth {
-    token: ID
+    token: ID!
     user: User
 }
 
 type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
-    login(email: String!, password: String!): Auth
+    loginUser(username: String!, password: String!): Auth
     addCampaign(name: String!, description: String!, day: String!): Campaign
     addCharacter(characterInput: CharacterInput): Character
     characterInCampaign(characterId: ID, campaignIds: [ID]): Character

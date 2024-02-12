@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
-import { validateEmail, validatePassword } from '../utils/auth';
+import { validateEmail, validatePassword } from "../utils/auth";
 
 const Signup = () => {
   const [userFormData, setUserFormData] = useState({
@@ -13,7 +13,7 @@ const Signup = () => {
     password: "",
   });
 
-  const [addUser, { error }] = useMutation(ADD_USER);
+  const [addUser, { error, data }] = useMutation(ADD_USER);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -22,12 +22,13 @@ const Signup = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    console.log(userFormData);
     try {
-      const response = await addUser({
+      const { data } = await addUser({
         variables: { ...userFormData },
       });
-      console.log(response, "response");
-      Auth.login(response.data.addUser.token);
+      console.log(data, "response");
+      Auth.login(data.addUser.token);
     } catch (err) {
       console.error(err);
     }
@@ -35,7 +36,7 @@ const Signup = () => {
 
   return (
     <Form onSubmit={handleFormSubmit}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Group className="mb-3 formBasicEmail" controlId="usernameInput">
         <Form.Label>Username</Form.Label>
         <Form.Control
           type="text"
@@ -46,7 +47,7 @@ const Signup = () => {
         />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Group className="mb-3 formBasicEmail" controlId="emailInput">
         <Form.Label>Email</Form.Label>
         <Form.Control
           type="email"
@@ -55,7 +56,6 @@ const Signup = () => {
           value={userFormData.email}
           onChange={handleInputChange}
           isInvalid={!validateEmail(userFormData.email)}
-        
         />
         <Form.Control.Feedback type="invalid">
           Please enter a valid email.
@@ -71,11 +71,12 @@ const Signup = () => {
           value={userFormData.password}
           onChange={handleInputChange}
           isInvalid={!validatePassword(userFormData.password)}
-          />
-          <Form.Control.Feedback type="invalid">
-            Password must contain at least one special character, one uppercase letter, and one number.
-          </Form.Control.Feedback>
-        </Form.Group>
+        />
+        <Form.Control.Feedback type="invalid">
+          Password must contain at least one special character, one uppercase
+          letter, and one number.
+        </Form.Control.Feedback>
+      </Form.Group>
 
       <Button variant="primary" type="submit">
         Signup
