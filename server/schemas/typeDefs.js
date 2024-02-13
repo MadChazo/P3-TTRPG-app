@@ -3,12 +3,10 @@ type User {
     _id: ID
     username: String
     email: String
+    characters: [Character]
     password: String
-    token: String
-    character: [Character]
-    campaign: [Campaign]
-}
-
+    campaigns: [Campaign]
+    
 type Character {
     _id: ID
     name: String
@@ -37,24 +35,12 @@ type Campaign {
     players: [User]
 }
 
-type Auth {
-    token: ID!
-    user: User
-}
-
 type Mutation {
-    addUser(username: String!, email: String!, password: String!): Auth
-    loginUser(username: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): User
+    login(email: String!, password: String!): User
     addCampaign(name: String!, description: String!, day: String!): Campaign
     addCharacter(characterInput: CharacterInput): Character
     characterInCampaign(characterId: ID, campaignIds: [ID]): Character
-}
-
-input CharacterInput {
-    name: String!
-    class: String!
-    stats: CharacterStatsInput
-    backstory: String
 }
   
   input CharacterStatsInput {
@@ -69,7 +55,7 @@ input CharacterInput {
 type Query {
     characters: [Character]
     users: [User]
-    user(username: String): User
+    user(id: ID!): User
     campaigns: [Campaign]
 }
 `;
