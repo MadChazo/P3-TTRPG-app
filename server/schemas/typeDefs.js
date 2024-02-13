@@ -39,7 +39,7 @@ type Mutation {
     addUser(username: String!, email: String!, password: String!): User
     loginUser(username: String!, password: String!): User
     addCampaign(name: String!, description: String!, day: String!): Campaign
-    addCharacter(characterInput: CharacterInput): Character
+    addCharacter(name: String!, classRole: String!, backstory: String!, stats: CharacterStatsInput): Character
     characterInCampaign(characterId: ID, campaignIds: [ID]): Character
 }
 input CharacterInput {
