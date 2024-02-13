@@ -1,5 +1,5 @@
-import { Form, Card, Row, Col, Container } from "react-bootstrap";
-import React, { useState } from "react";
+import { Form, Row, Col, Container } from "react-bootstrap";
+import React from "react";
 
 const CharForm = () => {
   const handleFormSubmit = async (e) => {
@@ -11,25 +11,10 @@ const CharForm = () => {
       <Row className="gap-4 w-full py-2 justify-content-md-center">
         <Col md="auto">
           <Form.Group>
-            <Card
-              style={{
-                backgroundColor: "grey",
-                display: "inline-block",
-                width: "100%",
-                borderTopLeftRadius: "15px", 
-                borderTopRightRadius: "15px",
-                borderBottomLeftRadius: "0", 
-                borderBottomRightRadius: "0",
-              }}
-            >
-              <Card.Body style={{ padding: "5px" }}>
-                <Form.Label className="text-white" style={{ display: "block", textAlign: "center" }}>Character Name</Form.Label>
-              </Card.Body>
-            </Card>
+            <Form.Label className="text-white" style={{ display: "block", textAlign: "center",  }}>Character Name</Form.Label>
             <Form.Control
               style={{ backgroundColor: "black", color: "white",
-              borderTopLeftRadius: "0px", 
-              borderTopRightRadius: "0px",  }}
+              borderRadius: "10px",  }}
               type="text"
               name="name"
               required
@@ -38,23 +23,10 @@ const CharForm = () => {
         </Col>
         <Col md="auto">
           <Form.Group>
-            <Card
-              style={{
-                backgroundColor: "grey",
-                borderTopLeftRadius: "15px", 
-                borderTopRightRadius: "15px",
-                borderBottomLeftRadius: "0", 
-                borderBottomRightRadius: "0",
-              }}
-            >
-              <Card.Body style={{ padding: "5px" }}>
-                <Form.Label className="text-white" style={{ display: "block", textAlign: "center", }}>Class</Form.Label>
-              </Card.Body>
-            </Card>
+            <Form.Label className="text-white" style={{ display: "block", textAlign: "center", }}>Class</Form.Label>
             <Form.Control
               style={{ backgroundColor: "black", color: "white",                
-              borderTopLeftRadius: "0px", 
-              borderTopRightRadius: "0px", 
+              borderRadius: "10px", 
              }}
               type="text"
               name="class"
@@ -63,51 +35,14 @@ const CharForm = () => {
           </Form.Group>
         </Col>
       </Row>
-      {/* <Row className="justify-content-md-center py-2">
-        <Col md="auto">
-          <Form.Group>
-            <Card
-              style={{
-                backgroundColor: "grey",
-                width: "100%",
-                borderTopLeftRadius: "15px", 
-                borderTopRightRadius: "15px",
-              }}
-            >
-              <Card.Body style={{ padding: "5px" }}>
-                <Form.Label className="text-white">Race</Form.Label>
-              </Card.Body>
-            </Card>
-            <Form.Control
-              style={{ backgroundColor: "black", color: "white" }}
-              type="text"
-              name="race"
-            />
-          </Form.Group>
-        </Col>
-      </Row> */}
+    
       <Row className="justify-content-md-center">
         <Col md={10}>
           <Form.Group>
-            <Card
-              style={{
-                backgroundColor: "grey",
-                display: "inline-block",
-                width: "100%",
-                borderTopLeftRadius: "15px", 
-                borderTopRightRadius: "15px",
-                borderBottomLeftRadius: "0", 
-                borderBottomRightRadius: "0",
-              }}
-            >
-              <Card.Body style={{ padding: "5px" }}>
-                <Form.Label className="text-white" style={{ display: "block", textAlign: "center" }}>Back Story</Form.Label>
-              </Card.Body>
-            </Card>
+            <Form.Label className="text-white" style={{ display: "block", textAlign: "center" }}>Back Story</Form.Label>
             <Form.Control
               style={{ backgroundColor: "black", color: "white", marginBottom: "10px",                
-              borderTopLeftRadius: "0px", 
-              borderTopRightRadius: "0px", 
+              borderRadius: "10px", 
               }}
               as="textarea"
               rows="10"
@@ -120,26 +55,10 @@ const CharForm = () => {
         <Row>
           <Col xs={12} md={6}>
             <Form.Group>
-              <Card
-                style={{
-                  backgroundColor: "grey",
-                  display: "inline-block",
-                  // margin: "10px",
-                  width: "100%",
-                  borderTopLeftRadius: "15px", 
-                  borderTopRightRadius: "15px",
-                  borderBottomLeftRadius: "0", 
-                  borderBottomRightRadius: "0",
-                }}
-              >
-                <Card.Body style={{ padding: "5px" }}>
-                  <Form.Label className="text-white" style={{ display: "block", textAlign: "center" }}>Strength</Form.Label>
-                </Card.Body>
-              </Card>
+              <Form.Label className="text-white" style={{ display: "block", textAlign: "center" }}>Strength</Form.Label>
               <Form.Control
                 style={{ backgroundColor: "black", color: "white", marginBottom: "10px",
-                borderTopLeftRadius: "0px", 
-                borderTopRightRadius: "0px", 
+                borderRadius: "10px", 
                }}
                 type="number"
                 name="strength"
@@ -147,26 +66,10 @@ const CharForm = () => {
               />
             </Form.Group>
             <Form.Group>
-              <Card
-                style={{
-                  backgroundColor: "grey",
-                  display: "inline-block",
-                  // margin: "10px",
-                  width: "100%",
-                  borderTopLeftRadius: "15px", 
-                  borderTopRightRadius: "15px",
-                  borderBottomLeftRadius: "0", 
-                  borderBottomRightRadius: "0",
-                }}
-              >
-                <Card.Body style={{ padding: "5px" }}>
-                  <Form.Label className="text-white" style={{ display: "block", textAlign: "center" }}>Dexterity</Form.Label>
-                </Card.Body>
-              </Card>
+              <Form.Label className="text-white" style={{ display: "block", textAlign: "center" }}>Dexterity</Form.Label>
               <Form.Control
                 style={{ backgroundColor: "black", color: "white", marginBottom: "10px",
-                borderTopLeftRadius: "0px", 
-                borderTopRightRadius: "0px", 
+                borderRadius: "10px", 
                }}
                 type="number"
                 name="dexterity"
@@ -174,23 +77,10 @@ const CharForm = () => {
               />
             </Form.Group>
             <Form.Group>
-              <Card
-                style={{
-                  backgroundColor: "grey",
-                  borderTopLeftRadius: "15px", 
-                  borderTopRightRadius: "15px",
-                  borderBottomLeftRadius: "0", 
-                  borderBottomRightRadius: "0",
-                }}
-              >
-                <Card.Body style={{ padding: "5px"  }}>
-                  <Form.Label className="text-white" style={{ display: "block", textAlign: "center" }}>Constitution</Form.Label>
-                </Card.Body>
-              </Card>
+              <Form.Label className="text-white" style={{ display: "block", textAlign: "center" }}>Constitution</Form.Label>
               <Form.Control
                 style={{ backgroundColor: "black", color: "white",                 
-                borderTopLeftRadius: "0px", 
-                borderTopRightRadius: "0px", 
+                borderRadius: "10px", 
                 
                }}
                 type="number"
@@ -202,25 +92,9 @@ const CharForm = () => {
 
           <Col xs={12} md={6}>
             <Form.Group>
-              <Card
-                style={{
-                  backgroundColor: "grey",
-                  display: "inline-block",
-                  // margin: "10px",
-                  width: "100%",
-                  borderTopLeftRadius: "15px", 
-                  borderTopRightRadius: "15px",
-                  borderBottomLeftRadius: "0", 
-                  borderBottomRightRadius: "0",
-                }}
-              >
-                <Card.Body style={{ padding: "5px" }}>
-                  <Form.Label className="text-white" style={{ display: "block", textAlign: "center" }}>Intelligence</Form.Label>
-                </Card.Body>
-              </Card>
+              <Form.Label className="text-white" style={{ display: "block", textAlign: "center" }}>Intelligence</Form.Label>
               <Form.Control
-                style={{ backgroundColor: "black", color: "white", marginBottom: "10px",                borderTopLeftRadius: "0px", 
-                borderTopRightRadius: "0px", 
+                style={{ backgroundColor: "black", color: "white", marginBottom: "10px",                borderRadius: "10px", 
                }}
                 type="number"
                 name="intelligence"
@@ -228,52 +102,20 @@ const CharForm = () => {
               />
             </Form.Group>
             <Form.Group>
-              <Card
-                style={{
-                  backgroundColor: "grey",
-                  display: "inline-block",
-                  // margin: "10px",
-                  width: "100%",
-                  borderTopLeftRadius: "15px", 
-                  borderTopRightRadius: "15px",
-                  borderBottomLeftRadius: "0", 
-                  borderBottomRightRadius: "0",
-                }}
-              >
-                <Card.Body style={{ padding: "5px" }}>
-                  <Form.Label className="text-white" style={{ display: "block", textAlign: "center" }}>Wisdom</Form.Label>
-                </Card.Body>
-              </Card>
+              <Form.Label className="text-white" style={{ display: "block", textAlign: "center" }}>Wisdom</Form.Label>
               <Form.Control
-                style={{ backgroundColor: "black", color: "white", marginBottom: "10px",                borderTopLeftRadius: "0px", 
-                borderTopRightRadius: "0px",  }}
+                style={{ backgroundColor: "black", color: "white", marginBottom: "10px",                borderRadius: "10px",  }}
                 type="number"
                 name="wisdom"
                 required
               />
             </Form.Group>
             <Form.Group>
-              <Card
-                style={{
-                  backgroundColor: "grey",
-                  display: "inline-block",
-                  // margin: "10px",
-                  width: "100%",
-                  borderTopLeftRadius: "15px", 
-                  borderTopRightRadius: "15px",
-                  borderBottomLeftRadius: "0", 
-                  borderBottomRightRadius: "0",
-                }}
-              >
-                <Card.Body style={{ padding: "5px" }}>
-                  <Form.Label className="text-white" style={{ display: "block", textAlign: "center" }}>Charisma</Form.Label>
-                </Card.Body>
-              </Card>
+              <Form.Label className="text-white" style={{ display: "block", textAlign: "center" }}>Charisma</Form.Label>
               <Form.Control
                 style={{ backgroundColor: "black", 
                 color: "white",  
-                borderTopLeftRadius: "0px", 
-                borderTopRightRadius: "0px", 
+                borderRadius: "10px", 
               }}
                 type="number"
                 name="charisma"

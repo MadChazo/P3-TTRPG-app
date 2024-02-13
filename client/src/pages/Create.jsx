@@ -12,7 +12,7 @@ const CharCreate = () => {
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           height: "100vh",
-          opacity: "0.5", // Set the desired opacity value here
+          opacity: "0.5", 
           position: "absolute",
           top: 0,
           left: 0,
