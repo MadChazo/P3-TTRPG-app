@@ -69,6 +69,7 @@ const Login = () => {
       <Container className="d-flex justify-content-center">
         <Row>
           <Col md={12}>
+          {showAlert && <div className="alert alert-danger">Halt adventurer! Your Username or Password was incorrect!</div>}
             <Form validated={validated} onSubmit={handleFormSubmit}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label className="text-white">Username</Form.Label>
@@ -95,7 +96,7 @@ const Login = () => {
                 />
               </Form.Group>
 
-              <Button variant="light" type="submit">
+              <Button variant="dark" type="submit" style={{ boxShadow: '3px 3px 3px 3px rgba(0, 0, 0, 0.5)' }}>
                 Login
               </Button>
             </Form>
