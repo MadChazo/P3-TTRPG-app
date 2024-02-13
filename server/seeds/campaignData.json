@@ -1,10 +1,12 @@
 [
   {
     "name": "Miravyste",
-    "day": "Sunday"
+    "day": "Sunday",
+    "players": ["65c58043cbbd913cda93a39a", "65c58043cbbd913cda93a399"]
   },
   {
     "name": "Curse of Strahd",
-    "day": "Wednesday"
+    "day": "Wednesday",
+    "players": ["65c58043cbbd913cda93a39b", "65c58043cbbd913cda93a39c"]
   }
 ]

@@ -1,30 +1,93 @@
 [
   {
     "name": "Obyrana Fortuna",
-    "class": "Multiclass"
+    "class": "Multiclass",
+    "stats": {
+      "strength": 15,
+      "dexterity": 12,
+      "constitution": 14,
+      "intelligence": 10,
+      "wisdom": 8,
+      "charisma": 16
+    },
+    "backstory": "Obyrana Fortuna was born into a family of adventurers..."
   },
   {
     "name": "Raspberry",
-    "class": "Multiclass"
+    "class": "Multiclass",
+    "stats": {
+      "strength": 11,
+      "dexterity": 14,
+      "constitution": 13,
+      "intelligence": 9,
+      "wisdom": 15,
+      "charisma": 12
+    },
+    "backstory": "Raspberry grew up in a small village, dreaming of adventure..."
   },
   {
     "name": "Shawty",
-    "class": "Low"
+    "class": "Low",
+    "stats": {
+      "strength": 10,
+      "dexterity": 10,
+      "constitution": 10,
+      "intelligence": 10,
+      "wisdom": 10,
+      "charisma": 10
+    },
+    "backstory": "Shawty was always underestimated due to their size, but they had a heart of gold..."
   },
   {
     "name": "Test",
-    "class": "Test"
+    "class": "Test",
+    "stats": {
+      "strength": 8,
+      "dexterity": 8,
+      "constitution": 8,
+      "intelligence": 8,
+      "wisdom": 8,
+      "charisma": 8
+    },
+    "backstory": "Test was a mysterious figure, known only by a few..."
   },
   {
     "name": "Blade",
-    "class": "Rogue"
+    "class": "Rogue",
+    "stats": {
+      "strength": 12,
+      "dexterity": 18,
+      "constitution": 14,
+      "intelligence": 13,
+      "wisdom": 10,
+      "charisma": 15
+    },
+    "backstory": "Blade was an expert in the art of stealth, lurking in the shadows..."
   },
   {
     "name": "Name",
-    "class": "Class"
+    "class": "Class",
+    "stats": {
+      "strength": 9,
+      "dexterity": 11,
+      "constitution": 10,
+      "intelligence": 12,
+      "wisdom": 14,
+      "charisma": 13
+    },
+    "backstory": "Name had a mysterious past, with secrets hidden deep within..."
   },
   {
     "name": "Flo Rida",
-    "class": "Bard"
+    "class": "Bard",
+    "stats": {
+      "strength": 10,
+      "dexterity": 14,
+      "constitution": 12,
+      "intelligence": 16,
+      "wisdom": 11,
+      "charisma": 18
+    },
+    "backstory": "Flo Rida was a charismatic bard, captivating audiences with their music..."
   }
 ]
