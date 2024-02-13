@@ -1,5 +1,5 @@
 const db = require("../config/connection.js");
-const { Character, User, Campaign } = require("../models");
+const { User, Character, Campaign } = require("../models");
 const cleanDB = require("./cleanDB");
 
 const characterData = require("./characterData.json");
@@ -11,30 +11,34 @@ db.once("open", async () => {
   await cleanDB("User", "users");
   await cleanDB("Campaign", "campaigns");
 
-  const characters = await Character.create(characterData);
-  const users = await User.create(userData);
-  const campaigns = await Campaign.create(campaignData);
-
+  const users = await User.insertMany(userData);
+  const characters = await Character.insertMany(characterData);
+  const campaigns = await Campaign.insertMany(campaignData);
 
   for (newCharacter of characters) {
     const tempUser = users[Math.floor(Math.random() * users.length)];
-    tempUser.characters.push(newCharacter._id);
+    tempUser.characters.push(newCharacter);
+    newCharacter.user = tempUser;
     await tempUser.save();
   }
 
   for (newUser of users) {
     const tempCampaign =
       campaigns[Math.floor(Math.random() * campaigns.length)];
-    tempCampaign.players.push[newUser._id];
+    tempCampaign.players.push[newUser];
     newUser.campaigns.push[tempCampaign];
     await tempCampaign.save();
   }
 
-  for (const newCampaign of campaigns) {
-    if (newCampaign.players.length > 0) {
-      const randomIndex = Math.floor(Math.random() * newCampaign.players.length);
-      const randomPlayerId = newCampaign.players[randomIndex];
-      await Campaign.findByIdAndUpdate(newCampaign._id, { gm: randomPlayerId });
+  // Sets a random player as GM of each campaign
+  for (newCampaign of campaigns) {
+    if (newCampaign.players.length) {
+      const tempGM =
+        newCampaign.players[
+          Math.floor(Math.random() * newCampaign.players.length)
+        ];
+      newCampaign.gm = tempGM;
+      await tempGM.save();
     }
   }
 

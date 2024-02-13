@@ -10,10 +10,10 @@ const campaignSchema = new Schema({
     type: String,
     trim: true,
   },
-  // description: {
-   // type: String,
-   // trim: true,
- // },
+  description: {
+   type: String,
+   trim: true,
+ },
   characters: [
     {
       type: Schema.Types.ObjectId,
