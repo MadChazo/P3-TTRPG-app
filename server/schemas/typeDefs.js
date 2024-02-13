@@ -35,9 +35,14 @@ type Campaign {
     players: [User]
 }
 
+type Auth {
+    token: ID!
+    user: User
+}
+
 type Mutation {
-    addUser(username: String!, email: String!, password: String!): User
-    loginUser(username: String!, password: String!): User
+    addUser(username: String!, email: String!, password: String!): Auth
+    loginUser(username: String!, password: String!): Auth
     addCampaign(name: String!, description: String!, day: String!): Campaign
     addCharacter(name: String!, classRole: String!, backstory: String!, stats: CharacterStatsInput): Character
     characterInCampaign(characterId: ID, campaignIds: [ID]): Character
