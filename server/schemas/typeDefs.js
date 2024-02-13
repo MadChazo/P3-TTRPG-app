@@ -6,7 +6,7 @@ type User {
     characters: [Character]
     password: String
     campaigns: [Campaign]
-    
+}    
 type Character {
     _id: ID
     name: String
@@ -37,13 +37,19 @@ type Campaign {
 
 type Mutation {
     addUser(username: String!, email: String!, password: String!): User
-    login(email: String!, password: String!): User
+    loginUser(username: String!, password: String!): User
     addCampaign(name: String!, description: String!, day: String!): Campaign
     addCharacter(characterInput: CharacterInput): Character
     characterInCampaign(characterId: ID, campaignIds: [ID]): Character
 }
+input CharacterInput {
+    name: String
+    class: String
+    stats: CharacterStatsInput
+    backstory: String
+}
   
-  input CharacterStatsInput {
+input CharacterStatsInput {
     strength: Int
     dexterity: Int
     constitution: Int
