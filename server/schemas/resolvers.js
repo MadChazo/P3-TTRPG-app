@@ -4,18 +4,16 @@ const { signToken, AuthenticationError } = require("../utils/auth");
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().populate("characters").populate("campaigns");
+      return await User.find({}).populate("characters");
     },
-    user: async (parent, { username }) => {
-      return User.findOne({ username })
-        .populate("characters")
-        .populate("campaigns");
+    user: async (parent, { id }) => {
+      return await User.findById(id).populate("characters");
     },
     characters: async () => {
-      return Character.find().populate("user").populate("campaigns");
+      return await Character.find({}).populate("campaigns");
     },
     campaigns: async () => {
-      return Campaign.find().populate("players").populate("gm");
+      return await Campaign.find().populate("players").populate("gm");
     },
   },
 
@@ -29,13 +27,13 @@ const resolvers = {
       const user = await User.findOne({ username });
       console.log(user, " found");
       if (!user) {
-        console.log("Incorrect User")
+        console.log("Incorrect User");
         throw AuthenticationError;
       }
 
       const correctPw = await user.isCorrectPassword(password);
       if (!correctPw) {
-        console.log("Incorrect Password")
+        console.log("Incorrect Password");
         throw AuthenticationError;
       }
 
