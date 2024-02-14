@@ -6,14 +6,26 @@ const campaignSchema = new Schema({
     required: true,
     trim: true,
   },
-  day: {
+  module: {
     type: String,
     trim: true,
   },
-  description: {
-   type: String,
-   trim: true,
- },
+  days: [
+    {
+      type: String,
+      trim: true,
+    },
+  ],
+  story: {
+    type: String,
+    trim: true,
+  },
+  startTime: {
+    type: Number,
+  },
+  endTime: {
+    type: Number,
+  },
   characters: [
     {
       type: Schema.Types.ObjectId,

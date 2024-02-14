@@ -26,8 +26,11 @@ type Character {
 type Campaign {
     _id: ID
     name: String
-    description: String
-    day: String
+    module: String
+    story: String
+    days: [String]
+    startTime: Int
+    endTime: Int
     characters: [Character]
     gm: User
     players: [User]
@@ -41,7 +44,7 @@ type Auth {
 type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     loginUser(username: String!, password: String!): Auth
-    addCampaign(name: String!, description: String!, day: String!): Campaign
+    addCampaign(name: String!, module: String!, story: String! days: [String!], gm: ID!, startTime: Int!, endTime: Int!): Campaign
     addCharacter(name: String!, classRole: String!, backstory: String!, strength: Int!, dexterity: Int!, constitution: Int!, intelligence: Int!, wisdom: Int!, charisma: Int!, user: ID!): Character
     characterInCampaign(characterId: ID, campaignIds: [ID]): Character
     removeCharacter(characterId: ID!): Character

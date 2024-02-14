@@ -21,7 +21,7 @@ const Campaign = () => {
                 <Row>
                     <Col className="text-center">
                         <main>
-                            <h1>Select An Campaign</h1>
+                            <h1>Select A Campaign</h1>
                             <Button variant="dark" href="/CreateCampaign" style={{ boxShadow: '3px 3px 3px 3px rgba(0, 0, 0, 0.5)' }}>Create Campaign</Button>{' '}
                         </main>
                     </Col>
