@@ -24,8 +24,8 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_CHARACTER = gql`
-  mutation addCharacter( $name: String!, $classRole: String!, $backstory: String!, $strength: Int!, $dexterity: Int!, $constitution: Int!, $intelligence: Int!, $wisdom: Int!, $charisma: Int!) {
-    addCharacter( name: $name, classRole: $classRole, backstory: $backstory, strength: $strength, dexterity: $dexterity, constitution: $constitution, intelligence: $intelligence, wisdom: $wisdom, charisma: $charisma) {
+  mutation addCharacter($name: String!, $classRole: String!, $backstory: String!, $strength: Int!, $dexterity: Int!, $constitution: Int!, $intelligence: Int!, $wisdom: Int!, $charisma: Int! $user: ID!) {
+    addCharacter(name: $name, classRole: $classRole, backstory: $backstory, strength: $strength, dexterity: $dexterity, constitution: $constitution, intelligence: $intelligence, wisdom: $wisdom, charisma: $charisma, user: $user) {
       _id
       name
       classRole
@@ -40,3 +40,18 @@ export const ADD_CHARACTER = gql`
     }
   }
 `;
+
+export const ADD_CAMPAIGN = gql`
+mutation addCampaign($name: String!, $module: String!, $story: String!, $days: [String!], $startTime: Int!, $endTime: Int!, $gm: ID!){
+addCampaign(name: $name, module: $module, story: $story, days: $days, startTime: $startTime, endTime: $endTime, gm: $gm){
+    _id
+    name
+    module
+    story
+    days
+    startTime
+    endTime
+    gm
+}
+}
+`

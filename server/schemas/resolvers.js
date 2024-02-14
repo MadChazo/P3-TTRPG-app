@@ -114,22 +114,22 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-    addCampaign: async (parent, { campaignInput }, { user }) => {
-      if (!user) {
-        throw AuthenticationError;
+    addCampaign: async (parent, { name, module, story, days, startTime, endTime }, context) => {
+      if (context.user) {
+        const newCampaign = await Campaign.create({
+          name, module, story, days, startTime, endTime,
+          gm: context.user._id,
+        });
+  
+        await User.findOneAndUpdate({_id: context.user._id}, {
+          $addToSet: {
+            campaigns: newCampaign._id,
+          },
+        });
+  
+        return newCampaign;
       }
-      const newCampaign = await Campaign.create({
-        ...campaignInput,
-        gm: user._id,
-      });
-
-      await User.findByIdAndUpdate(user._id, {
-        $push: {
-          campaigns: newCampaign._id,
-        },
-      });
-
-      return newCampaign;
+      throw AuthenticationError;
     },
     characterInCampaign: async (parent, { characterId, campaignIds }) => {
       const updatedCharacter = await Character.findByIdAndUpdate(
