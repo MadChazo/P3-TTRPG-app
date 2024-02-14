@@ -6,23 +6,21 @@ const characterSchema = new Schema({
     required: true,
     trim: true,
   },
-  class: {
+  classRole: {
     type: String,
     required: true,
     trim: true,
-  },
-  stats: {
-    strength: { type: Number, default: 10 },
-    dexterity: { type: Number, default: 10 },
-    constitution: { type: Number, default: 10 },
-    intelligence: { type: Number, default: 10 },
-    wisdom: { type: Number, default: 10 },
-    charisma: { type: Number, default: 10 },
   },
   backstory: {
     type: String,
     trim: true,
   },
+  strength: { type: Number, default: 10 },
+  dexterity: { type: Number, default: 10 },
+  constitution: { type: Number, default: 10 },
+  intelligence: { type: Number, default: 10 },
+  wisdom: { type: Number, default: 10 },
+  charisma: { type: Number, default: 10 },
   campaigns: [
     {
       type: Schema.Types.ObjectId,

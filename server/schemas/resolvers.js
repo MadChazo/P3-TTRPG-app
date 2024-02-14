@@ -4,16 +4,30 @@ const { signToken, AuthenticationError } = require("../utils/auth");
 const resolvers = {
   Query: {
     users: async () => {
-      return await User.find({}).populate("characters");
+      return await User.find().populate("characters").populate("campaigns");
     },
-    user: async (parent, { id }) => {
-      return await User.findById(id).populate("characters");
+    user: async (parent, { _id }) => {
+      return await User.findOne({ _id })
+        .populate("characters")
+        .populate("campaigns");
     },
-    characters: async () => {
-      return await Character.find({}).populate("campaigns");
+    characters: async (parent, { _id }) => {
+      const params = _id ? { _id } : {};
+      return await Character.find(params).populate("campaigns");
     },
     campaigns: async () => {
-      return await Campaign.find().populate("players").populate("gm");
+      return await Campaign.find()
+        .populate("players")
+        .populate("gm")
+        .populate("characters");
+    },
+    me: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne({ _id: context.user._id })
+          .populate("characters")
+          .populate("campaigns");
+      }
+      throw AuthenticationError;
     },
   },
 
@@ -25,7 +39,6 @@ const resolvers = {
     },
     loginUser: async (parent, { username, password }) => {
       const user = await User.findOne({ username });
-      console.log(user, " found");
       if (!user) {
         console.log("Incorrect User");
         throw AuthenticationError;
@@ -40,20 +53,66 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    addCharacter: async (parent, { characterInput }, { user }) => {
-      if (!user) {
-        throw AuthenticationError;
+    addCharacter: async (
+      parent,
+      {
+        name,
+        classRole,
+        backstory,
+        strength,
+        dexterity,
+        constitution,
+        intelligence,
+        wisdom,
+        charisma,
+      },
+      context
+    ) => {
+      console.log(
+        "Adding: ",
+        name,
+        classRole,
+        backstory,
+        strength,
+        dexterity,
+        constitution,
+        intelligence,
+        wisdom,
+        charisma,
+      );
+      console.log("Context: ", context);
+      if (context.user) {
+        console.log(
+          "Adding: ",
+          name,
+          classRole,
+          backstory,
+          strength,
+          dexterity,
+          constitution,
+          intelligence,
+          wisdom,
+          charisma
+        );
+        const newChar = await Character.create({
+          name,
+          classRole,
+          backstory,
+          strength,
+          dexterity,
+          constitution,
+          intelligence,
+          wisdom,
+          charisma,
+          user: context.user._id,
+        });
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { characters: newChar._id } }
+        );
+        return newChar;
       }
-      const newCharacter = await Character.create({
-        ...characterInput,
-        user: user._id,
-      });
-
-      await User.findByIdAndUpdate(user._id, {
-        $push: { characters: newCharacter._id },
-      });
-
-      return newCharacter;
+      throw AuthenticationError;
     },
     addCampaign: async (parent, { campaignInput }, { user }) => {
       if (!user) {
@@ -80,6 +139,23 @@ const resolvers = {
       );
 
       return updatedCharacter;
+    },
+    removeCharacter: async (parent, { characterId }, context) => {
+      if (context.user) {
+        const character = await Character.findOneAndDelete({
+          id: characterId,
+          user: context.user._id,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { characters: character._id } }
+        );
+
+        return character;
+      }
+
+      throw AuthenticationError;
     },
   },
 };

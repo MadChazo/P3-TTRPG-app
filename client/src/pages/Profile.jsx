@@ -1,8 +1,15 @@
 import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import backgroundImage from "../assets/createChar.jpg";
+import {Navigate} from "react-router-dom";
+
+import Auth from '../utils/auth';
 
 const Profile = () => {
+    if (!Auth.loggedIn()) {
+        return <Navigate to="/login"/>
+    }
+
     return (
         <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', position: 'relative' }}>
             <div style={{

@@ -7,22 +7,20 @@ type User {
     password: String
     campaigns: [Campaign]
 }    
+
 type Character {
     _id: ID
     name: String
-    class: String
-    stats: CharacterStats
+    classRole: String
     backstory: String
-    user: User
-    campaigns: [Campaign]
-}
-type CharacterStats {
     strength: Int
     dexterity: Int
     constitution: Int
     intelligence: Int
     wisdom: Int
     charisma: Int
+    user: User
+    campaigns: [Campaign]
 }
 
 type Campaign {
@@ -44,30 +42,17 @@ type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     loginUser(username: String!, password: String!): Auth
     addCampaign(name: String!, description: String!, day: String!): Campaign
-    addCharacter(characterInput: CharacterInput): Character
+    addCharacter(name: String!, classRole: String!, backstory: String!, strength: Int!, dexterity: Int!, constitution: Int!, intelligence: Int!, wisdom: Int!, charisma: Int!, user: ID!): Character
     characterInCampaign(characterId: ID, campaignIds: [ID]): Character
+    removeCharacter(characterId: ID!): Character
 }
-input CharacterInput {
-    name: String
-    class: String
-    stats: CharacterStatsInput
-    backstory: String
-}
-  
-input CharacterStatsInput {
-    strength: Int
-    dexterity: Int
-    constitution: Int
-    intelligence: Int
-    wisdom: Int
-    charisma: Int
-  }
   
 type Query {
-    characters: [Character]
+    characters(id: ID!): [Character]
     users: [User]
     user(id: ID!): User
     campaigns: [Campaign]
+    me: User
 }
 `;
 
