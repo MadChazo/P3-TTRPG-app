@@ -1,4 +1,4 @@
-import { Form, Row, Col, Container, Button } from "react-bootstrap";
+import { Form, Row, Col, Container, Button, Card } from "react-bootstrap";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
@@ -28,11 +28,17 @@ const CharForm = () => {
     event.preventDefault();
     console.log("Input: ", characterInput);
     console.log("Auth: ", Auth.getProfile());
+    characterInput.strength = parseInt(characterInput.strength);
+    characterInput.dexterity = parseInt(characterInput.dexterity);
+    characterInput.constitution = parseInt(characterInput.constitution);
+    characterInput.intelligence = parseInt(characterInput.intelligence);
+    characterInput.wisdom = parseInt(characterInput.wisdom);
+    characterInput.charisma = parseInt(characterInput.charisma);
     try {
       const { data } = await addCharacter({
         variables: {
           ...characterInput,
-          // user: Auth.getProfile().data._id,
+          user: Auth.getProfile().data._id,
         },
       });
 
@@ -50,8 +56,12 @@ const CharForm = () => {
             <Col md="auto">
               <Form.Group>
                 <Form.Label
-                  className="text-white"
-                  style={{ display: "block", textAlign: "center" }}
+                  style={{
+                    display: "block",
+                    textAlign: "center",
+                    fontWeight: "bold",
+                    color: "black",
+                  }}
                 >
                   Character Name
                 </Form.Label>
@@ -71,8 +81,12 @@ const CharForm = () => {
             <Col md="auto">
               <Form.Group>
                 <Form.Label
-                  className="text-white"
-                  style={{ display: "block", textAlign: "center" }}
+                  style={{
+                    display: "block",
+                    textAlign: "center",
+                    fontWeight: "bold",
+                    color: "black",
+                  }}
                 >
                   Class
                 </Form.Label>
@@ -95,17 +109,22 @@ const CharForm = () => {
             <Col md={10}>
               <Form.Group>
                 <Form.Label
-                  className="text-white"
-                  style={{ display: "block", textAlign: "center" }}
+                  style={{
+                    display: "block",
+                    textAlign: "center",
+                    fontWeight: "bold",
+                    color: "black",
+                  }}
                 >
                   Back Story
                 </Form.Label>
                 <Form.Control
                   style={{
                     backgroundColor: "black",
-                    color: "white",
                     marginBottom: "10px",
                     borderRadius: "10px",
+                    fontWeight: "bold",
+                    color: "black",
                   }}
                   onChange={handleInputChange}
                   as="textarea"
@@ -120,8 +139,12 @@ const CharForm = () => {
               <Col xs={12} md={6}>
                 <Form.Group>
                   <Form.Label
-                    className="text-white"
-                    style={{ display: "block", textAlign: "center" }}
+                    style={{
+                      display: "block",
+                      textAlign: "center",
+                      fontWeight: "bold",
+                      color: "black",
+                    }}
                   >
                     Strength
                   </Form.Label>
@@ -140,8 +163,12 @@ const CharForm = () => {
                 </Form.Group>
                 <Form.Group>
                   <Form.Label
-                    className="text-white"
-                    style={{ display: "block", textAlign: "center" }}
+                    style={{
+                      display: "block",
+                      textAlign: "center",
+                      fontWeight: "bold",
+                      color: "black",
+                    }}
                   >
                     Dexterity
                   </Form.Label>
@@ -160,8 +187,12 @@ const CharForm = () => {
                 </Form.Group>
                 <Form.Group>
                   <Form.Label
-                    className="text-white"
-                    style={{ display: "block", textAlign: "center" }}
+                    style={{
+                      display: "block",
+                      textAlign: "center",
+                      fontWeight: "bold",
+                      color: "black",
+                    }}
                   >
                     Constitution
                   </Form.Label>
@@ -182,8 +213,12 @@ const CharForm = () => {
               <Col xs={12} md={6}>
                 <Form.Group>
                   <Form.Label
-                    className="text-white"
-                    style={{ display: "block", textAlign: "center" }}
+                    style={{
+                      display: "block",
+                      textAlign: "center",
+                      fontWeight: "bold",
+                      color: "black",
+                    }}
                   >
                     Intelligence
                   </Form.Label>
@@ -202,8 +237,12 @@ const CharForm = () => {
                 </Form.Group>
                 <Form.Group>
                   <Form.Label
-                    className="text-white"
-                    style={{ display: "block", textAlign: "center" }}
+                    style={{
+                      display: "block",
+                      textAlign: "center",
+                      fontWeight: "bold",
+                      color: "black",
+                    }}
                   >
                     Wisdom
                   </Form.Label>
@@ -222,8 +261,12 @@ const CharForm = () => {
                 </Form.Group>
                 <Form.Group>
                   <Form.Label
-                    className="text-white"
-                    style={{ display: "block", textAlign: "center" }}
+                    style={{
+                      display: "block",
+                      textAlign: "center",
+                      fontWeight: "bold",
+                      color: "black",
+                    }}
                   >
                     Charisma
                   </Form.Label>
@@ -251,10 +294,15 @@ const CharForm = () => {
           </Container>
         </Form>
       ) : (
-        <p>
-          You need to be logged in to create a character. Please{" "}
-          <Link to="/login">login</Link> or <Link to="/signup">signup</Link>.
-        </p>
+        <Card bg="dark" text="white" className="mb-3">
+          <Card.Body>
+            <Card.Text>
+              You need to be logged in to create a character. Please{" "}
+              <Link to="/login">login</Link> or <Link to="/signup">signup</Link>
+              .
+            </Card.Text>
+          </Card.Body>
+        </Card>
       )}
     </div>
   );

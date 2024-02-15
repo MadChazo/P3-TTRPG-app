@@ -1,13 +1,6 @@
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  Form,
-  Button,
-  FormControl,
-  Row,
-  Col,
-  Container,
-} from "react-bootstrap";
+import { Form, Button, Card, Row, Col, Container } from "react-bootstrap";
 import backgroundImage from "../assets/Login.jpg";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../utils/mutations";
@@ -69,10 +62,28 @@ const Login = () => {
       <Container className="d-flex justify-content-center">
         <Row>
           <Col md={12}>
-          {showAlert && <div className="alert alert-danger">Halt adventurer! Your Username or Password was incorrect!</div>}
+            {showAlert && (
+              <div className="alert alert-danger">
+                Halt adventurer! Your Username or Password was incorrect!
+              </div>
+            )}
+            <Card bg="black" text="white" className="mb-3 text-center mt-5">
+              <Card.Body>
+                <Card.Text>
+                  Welcome, brave adventurer, to QuestBook! As you step into our
+                  digital realm, prepare to embark on epic quests, forge
+                  alliances, and unravel mysteries. Whether you’re a seasoned
+                  dungeon master or a fledgling sorcerer, this is your
+                  sanctuary—a place where dragons breathe fire, taverns echo
+                  with laughter, and magic pulses through every pixel.
+                </Card.Text>
+              </Card.Body>
+            </Card>
             <Form validated={validated} onSubmit={handleFormSubmit}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label className="text-white">Username</Form.Label>
+                <Form.Label style={{ fontWeight: "bold", color: "black" }}>
+                  Username
+                </Form.Label>
                 <Form.Control
                   style={{ backgroundColor: "black", color: "white" }}
                   type="username"
@@ -85,7 +96,9 @@ const Login = () => {
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label className="text-white">Password</Form.Label>
+                <Form.Label style={{ fontWeight: "bold", color: "black" }}>
+                  Password
+                </Form.Label>
                 <Form.Control
                   style={{ backgroundColor: "black", color: "white" }}
                   type="password"
@@ -96,7 +109,11 @@ const Login = () => {
                 />
               </Form.Group>
 
-              <Button variant="dark" type="submit" style={{ boxShadow: '3px 3px 3px 3px rgba(0, 0, 0, 0.5)' }}>
+              <Button
+                variant="dark"
+                type="submit"
+                style={{ boxShadow: "3px 3px 3px 3px rgba(0, 0, 0, 0.5)" }}
+              >
                 Login
               </Button>
             </Form>

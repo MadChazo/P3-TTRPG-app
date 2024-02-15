@@ -11,8 +11,8 @@ N/A
 ## Usage
 
 Visit the website at https://guarded-citadel-41709-e270466b60c1.herokuapp.com/.
-![screenshot of Questbook homepage]()
-When you first visit the site, you will see the login screen. To sign up for an account, click the signup link in the nav bar, and enter a unique username and email, and choose a password that contains an uppercase letter, a lowercase letter, a number, and a special character. Make sure to keep track of this username and password, as this site does not yet have a function to retrieve or reset lost login information. 
+![screenshot of Questbook homepage](./client/src/assets/Screenshot.png)
+When you first visit the site, you will see the login screen. To sign up for an account, click the signup link in the nav bar, and enter a unique username and email, and choose a password that contains an uppercase letter, a lowercase letter, a number, and a special character. Make sure to keep track of this username and password, as this site does not yet have a function to retrieve or reset lost login information.
 
 After signing up or logging in, you will be taken to your profile, where you can see your current characters and a button to create a new character. When creating a new character, you will be asked to input their name, class/role, stats, and backstory. The stats you can input are based on the Dungeons & Dragons 5th Edition system, but we hope to offer support for other systems in the future. Your created characters will be saved to your account and can be edited or deleted at any time as long as you are logged in. Creating a campaign is very similar. The information required is very bare-bones at the moment, as there are many features not yet implemented on our site.
 

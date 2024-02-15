@@ -65,6 +65,7 @@ const resolvers = {
         intelligence,
         wisdom,
         charisma,
+        user,
       },
       context
     ) => {
@@ -78,58 +79,70 @@ const resolvers = {
         constitution,
         intelligence,
         wisdom,
-        charisma,
+        charisma
       );
       console.log("Context: ", context);
-      if (context.user) {
-        console.log(
-          "Adding: ",
-          name,
-          classRole,
-          backstory,
-          strength,
-          dexterity,
-          constitution,
-          intelligence,
-          wisdom,
-          charisma
-        );
-        const newChar = await Character.create({
-          name,
-          classRole,
-          backstory,
-          strength,
-          dexterity,
-          constitution,
-          intelligence,
-          wisdom,
-          charisma,
-          user: context.user._id,
-        });
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { characters: newChar._id } }
-        );
-        return newChar;
-      }
-      throw AuthenticationError;
+      // if (context.user) {
+      console.log(
+        "Adding: ",
+        name,
+        classRole,
+        backstory,
+        strength,
+        dexterity,
+        constitution,
+        intelligence,
+        wisdom,
+        charisma
+      );
+      const newChar = await Character.create({
+        name,
+        classRole,
+        backstory,
+        strength,
+        dexterity,
+        constitution,
+        intelligence,
+        wisdom,
+        charisma,
+        user,
+      });
+      await User.findOneAndUpdate(
+        { _id: user },
+        { $addToSet: { characters: newChar._id } }
+      );
+      return newChar;
+      // }
+      // throw AuthenticationError;
     },
-    addCampaign: async (parent, { name, module, story, days, startTime, endTime }, context) => {
-      if (context.user) {
-        const newCampaign = await Campaign.create({
-          name, module, story, days, startTime, endTime,
-          gm: context.user._id,
-        });
-  
-        await User.findOneAndUpdate({_id: context.user._id}, {
+    addCampaign: async (
+      parent,
+      { name, module, story, days, startTime, endTime },
+      context
+    ) => {
+      // if (context.user) {
+      const newCampaign = await Campaign.create({
+        name,
+        module,
+        story,
+        days,
+        startTime,
+        endTime,
+        gm: context.user._id,
+      });
+
+      await User.findOneAndUpdate(
+        { _id: context.user._id },
+        {
           $addToSet: {
             campaigns: newCampaign._id,
           },
-        });
-  
-        return newCampaign;
-      }
-      throw AuthenticationError;
+        }
+      );
+
+      return newCampaign;
+      // }
+      // throw AuthenticationError;
     },
     characterInCampaign: async (parent, { characterId, campaignIds }) => {
       const updatedCharacter = await Character.findByIdAndUpdate(
